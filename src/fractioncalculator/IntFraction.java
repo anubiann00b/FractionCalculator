@@ -14,13 +14,13 @@ public class IntFraction implements Fraction {
     private int denominator;
     
     public IntFraction(boolean positive, int numerator, int denominator) {
-        this.positive = positive;
-        this.wholePart = 0;
-        this.numerator = numerator;
-        this.denominator = denominator;
+        this(positive,0,numerator,denominator);
     }
     public IntFraction(boolean positive, int wholePart, int numerator, int denominator) {
-        
+        this.positive = positive;
+        this.wholePart = wholePart;
+        this.numerator = numerator;
+        this.denominator = denominator;
     }
     
     public IntFraction add(IntFraction other) {
