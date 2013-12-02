@@ -18,8 +18,8 @@ public class IntFraction implements Fraction {
     }
     public IntFraction(boolean positive, int wholePart, int numerator, int denominator) {
         this.positive = positive;
-        this.wholePart = wholePart;
-        this.numerator = numerator;
+        this.wholePart = 0;
+        this.numerator = numerator+wholePart*denominator;
         this.denominator = denominator;
     }
     
@@ -49,6 +49,15 @@ public class IntFraction implements Fraction {
 
     public int getDenominator() {
         return denominator;
+    }
+    
+    public int gcd(int a, int b) {
+        while (a!=b) {
+            int q = b;
+            b = a%b;
+            a = q;
+        }
+        return a;
     }
     
     public String toString() {

@@ -18,6 +18,10 @@ public class FractionCalculator {
         System.out.println("| Welcome to the Fraction Calculator |");
         System.out.println("| Enter an expression or \"q\" to quit |");
         System.out.println("| \"a_b/c\" represents mixed fractions |");
+        System.out.println("| \"a\" - whole part : \"b\" - numerator |");
+        System.out.println("| \"c\" is denominator of the fraction |");
+        System.out.println("| +, -, *, and / are valid operators |");
+        System.out.println("+------------------------------------+");
         while(!done) {
             String input = getInput();
             Parser.parse(input);
