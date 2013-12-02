@@ -1,11 +1,15 @@
 /* Shreyas Raman
- * Mr. Peterson
  * APCS Period 2
- * 6 December 2013
+ * December 3, 2013
+ * Project 2: Parser (3/4)
  */
 
 package fractioncalculator;
 
 public class Parser {
+
+    public static void parse(String input) {
+
+    }
     
 }

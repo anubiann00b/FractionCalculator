@@ -1,7 +1,7 @@
 /* Shreyas Raman
- * Mr. Peterson
  * APCS Period 2
- * 6 December 2013
+ * December 3, 2013
+ * Project 2: IntFraction (2/4)
  */
 
 package fractioncalculator;
@@ -24,26 +24,39 @@ public class IntFraction implements Fraction {
     }
     
     public IntFraction add(IntFraction other) {
-        throw new UnsupportedOperationException("Not done yet~");
+        return null;
     }
 
     public IntFraction subtract(IntFraction other) {
-        throw new UnsupportedOperationException("Not done yet~");
+        return this.add(other.switchSign());
     }
 
     public IntFraction multiply(IntFraction other) {
-        throw new UnsupportedOperationException("Not done yet~");
+        return null;
     }
 
     public IntFraction divide(IntFraction other) {
-        throw new UnsupportedOperationException("Not done yet~");
+        return null;
+    }
+    
+    public IntFraction simplify() {
+        return null;
     }
 
     public int getNumerator() {
-        throw new UnsupportedOperationException("Not done yet~");
+        return numerator;
     }
 
     public int getDenominator() {
-        throw new UnsupportedOperationException("Not done yet~");
+        return denominator;
+    }
+    
+    public String toString() {
+        return (positive?"":"-") + (wholePart==0?"":wholePart+"_") + numerator + "/" + denominator;
+    }
+
+    private IntFraction switchSign() {
+        this.positive = !positive;
+        return this;
     }
 }
