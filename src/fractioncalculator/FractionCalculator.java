@@ -21,10 +21,18 @@ public class FractionCalculator {
         System.out.println("| \"a\" - whole part : \"b\" - numerator |");
         System.out.println("| \"c\" is denominator of the fraction |");
         System.out.println("| +, -, *, and / are valid operators |");
+        System.out.println("| Whitespace will all be disregarded |");
+        System.out.println("| Any other character is disregarded |");
+        System.out.println("| Order of operations is needed here |");
+        System.out.println("| Version 1.0, made by Shreyas Raman |");
         System.out.println("+------------------------------------+");
         while(!done) {
             String input = getInput();
-            Parser.parse(input);
+            if (input.equals("q")) {
+                done = true;
+            } else {
+                Parser.parse(input);
+            }
         }
     }
     
@@ -37,7 +45,7 @@ public class FractionCalculator {
     }
 
     private static String getInputTestCase() {
-        counter = counter > testCases.length ? 0 : counter+1;
+        counter = counter<testCases.length-1?counter+1:0;
         return testCases[counter];
     }
 
@@ -50,7 +58,10 @@ public class FractionCalculator {
             "1-6",
             "7/6",
             "2_3/4+1",
-            "2_7/6"
+            "2_7/6",
+            "    1/123   ",
+            "qqwawhhtryj",
+            "1/2/3",
         };
     }
 }

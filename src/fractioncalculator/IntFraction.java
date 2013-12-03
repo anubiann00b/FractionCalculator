@@ -8,7 +8,6 @@ package fractioncalculator;
 
 public class IntFraction implements Fraction {
     
-    private boolean positive;
     private int wholePart;
     private int numerator;
     private int denominator;
@@ -17,9 +16,9 @@ public class IntFraction implements Fraction {
         this(positive,0,numerator,denominator);
     }
     public IntFraction(boolean positive, int wholePart, int numerator, int denominator) {
-        this.positive = positive;
         this.wholePart = 0;
         this.numerator = numerator+wholePart*denominator;
+        this.numerator = positive?this.numerator:-this.numerator;
         this.denominator = denominator;
     }
     
@@ -61,11 +60,11 @@ public class IntFraction implements Fraction {
     }
     
     public String toString() {
-        return (positive?"":"-") + (wholePart==0?"":wholePart+"_") + numerator + "/" + denominator;
+        return (numerator>0?"":"-") + (wholePart==0?"":wholePart+"_") + numerator + "/" + denominator;
     }
 
     private IntFraction switchSign() {
-        this.positive = !positive;
+        this.numerator = -this.numerator;
         return this;
     }
 }
