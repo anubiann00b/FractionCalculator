@@ -14,6 +14,7 @@ public class FractionCalculator {
     public static void main(String[] args) {
         populateTestCases();
         boolean done = false;
+        
         System.out.println("+------------------------------------+");
         System.out.println("| Welcome to the Fraction Calculator |");
         System.out.println("| Enter an expression or \"q\" to quit |");
@@ -26,18 +27,25 @@ public class FractionCalculator {
         System.out.println("| Order of operations is needed here |");
         System.out.println("| Version 1.0, made by Shreyas Raman |");
         System.out.println("+------------------------------------+");
+        
         while(!done) {
+            /*
             String input = getInput();
             if (input.equals("q")) {
                 done = true;
             } else {
                 Parser.parse(input);
             }
+            */
+            IntFraction f1 = new IntFraction(4,5);
+            IntFraction f2 = new IntFraction(6,7);
+            System.out.println(f1 + " + " + f2 + " = " + f1.add(f2));
         }
     }
     
     public static String getInput() {
         return getInputTestCase();
+        //return getInputFromConsole();
     }
 
     private static String getInputFromConsole() {
@@ -59,9 +67,24 @@ public class FractionCalculator {
             "7/6",
             "2_3/4+1",
             "2_7/6",
-            "    1/123   ",
-            "qqwawhhtryj",
+            "5_16/5",
+            "(17/2)/(15/2)",
+            "1/1",
+            "1//1",
+            "9.1/9",
+            "asdf",
+            "09",
+            "0/0",
+            "1/0",
+            "0/1",
+            "1/2+3",
+            "1+2/3",
             "1/2/3",
+            "1-2",
+            "1/2 / -1/4",
+            "1/-6",
+            "99/99/99",
+            "0"
         };
     }
 }
