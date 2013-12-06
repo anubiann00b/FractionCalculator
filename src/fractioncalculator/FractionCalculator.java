@@ -40,6 +40,7 @@ public class FractionCalculator {
             IntFraction f1 = new IntFraction(4,5);
             IntFraction f2 = new IntFraction(6,7);
             System.out.println(f1 + " + " + f2 + " = " + f1.add(f2));
+            done = true;
         }
     }
     
