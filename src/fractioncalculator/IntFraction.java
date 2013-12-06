@@ -47,13 +47,13 @@ public class IntFraction implements Fraction {
     
     public static IntFraction add(IntFraction f1, IntFraction f2) {
         IntFraction f = new IntFraction();
-        f.numerator = f1.numerator*f2.numerator;
+        f.numerator = f1.numerator*f2.denominator + f2.numerator*f1.denominator;
         f.denominator = f1.denominator*f2.denominator;
         return simplify(f);
     }
     
     public static IntFraction subtract(IntFraction f1, IntFraction f2) {
-        return add(f1,f2.switchSign());
+        return add(f1,switchSign(f2));
     }
 
     public static IntFraction multiply(IntFraction f1, IntFraction f2) {
@@ -64,7 +64,7 @@ public class IntFraction implements Fraction {
     }
 
     public static IntFraction divide(IntFraction f1, IntFraction f2) {
-        return multiply(f1,f2.inverse());
+        return multiply(f1,inverse(f2));
     }
     
     public static IntFraction simplify(IntFraction fraction) {
@@ -94,14 +94,12 @@ public class IntFraction implements Fraction {
         return numerator + "/" + denominator;
     }
 
-    private IntFraction switchSign() {
-        this.numerator = -1*this.numerator;
-        return this;
+    private static IntFraction switchSign(IntFraction fraction) {
+        IntFraction f = new IntFraction(-fraction.numerator,fraction.denominator);
+        return f;
     }
-    private IntFraction inverse() {
-        int num = this.numerator;
-        this.numerator = this.denominator;
-        this.denominator = num;
-        return this;
+    private static IntFraction inverse(IntFraction fraction) {
+        IntFraction f = new IntFraction(fraction.denominator,fraction.numerator);
+        return f;
     }
 }
