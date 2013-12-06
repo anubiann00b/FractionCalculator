@@ -11,7 +11,6 @@ public interface Fraction {
     public IntFraction subtract(IntFraction other);
     public IntFraction multiply(IntFraction other);
     public IntFraction divide(IntFraction other);
-    public IntFraction simplify(IntFraction fraction);
     public int getNumerator();
     public int getDenominator();
     public String toString();
