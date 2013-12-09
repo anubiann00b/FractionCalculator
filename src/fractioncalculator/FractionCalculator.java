@@ -40,22 +40,22 @@ public class FractionCalculator {
             IntFraction f1 = new IntFraction((int) (10*Math.random()+1),(int) (10*Math.random()+1));
             IntFraction f2 = new IntFraction((int) (10*Math.random()+1),(int) (10*Math.random()+1));
             System.out.println(f1 + " + " + f2 + " = " + f1.add(f2));
-            System.out.println(f1 + " - " + f2 + " = " + f1.subtract(f2));
-            System.out.println(f1 + " * " + f2 + " = " + f1.multiply(f2));
-            System.out.println(f1 + " / " + f2 + " = " + f1.divide(f2));
+            System.out.println(f1 + " - " + f2 + " = " + f1.subt(f2));
+            System.out.println(f1 + " * " + f2 + " = " + f1.mult(f2));
+            System.out.println(f1 + " / " + f2 + " = " + f1.div(f2));
         }
     }
     
     public static String getInput() {
-        return getInputTestCase();
+        return getTestCase();
         //return getInputFromConsole();
     }
 
-    private static String getInputFromConsole() {
+    private static String getConsole() {
         return null;
     }
 
-    private static String getInputTestCase() {
+    private static String getTestCase() {
         counter = counter<testCases.length-1?counter+1:0;
         return testCases[counter];
     }

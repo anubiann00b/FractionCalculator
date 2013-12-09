@@ -26,48 +26,48 @@ public class IntFraction implements Fraction {
     public IntFraction(boolean sign, int num, int n, int d) {
         this.n = (sign?1:-1)*n+num*d;
         this.d = d;
-        simplify(this);
+        simp(this);
     }
     
     public IntFraction add(IntFraction other) {
         return add(this, other);
     }
 
-    public IntFraction subtract(IntFraction other) {
-        return subtract(this, other);
+    public IntFraction subt(IntFraction other) {
+        return subt(this, other);
     }
 
-    public IntFraction multiply(IntFraction other) {
-        return multiply(this, other);
+    public IntFraction mult(IntFraction other) {
+        return mult(this, other);
     }
 
-    public IntFraction divide(IntFraction other) {
-        return divide(this, other);
+    public IntFraction div(IntFraction other) {
+        return div(this, other);
     }
     
     public static IntFraction add(IntFraction f1, IntFraction f2) {
         IntFraction f = new IntFraction();
         f.n = f1.n*f2.d + f2.n*f1.d;
         f.d = f1.d*f2.d;
-        return simplify(f);
+        return simp(f);
     }
     
-    public static IntFraction subtract(IntFraction f1, IntFraction f2) {
+    public static IntFraction subt(IntFraction f1, IntFraction f2) {
         return add(f1,switchSign(f2));
     }
 
-    public static IntFraction multiply(IntFraction f1, IntFraction f2) {
+    public static IntFraction mult(IntFraction f1, IntFraction f2) {
         IntFraction f = new IntFraction();
         f.n = f1.n*f2.n;
         f.d = f1.d*f2.d;
-        return simplify(f);
+        return simp(f);
     }
 
-    public static IntFraction divide(IntFraction f1, IntFraction f2) {
-        return multiply(f1,inverse(f2));
+    public static IntFraction div(IntFraction f1, IntFraction f2) {
+        return mult(f1,inverse(f2));
     }
     
-    public static IntFraction simplify(IntFraction f) {
+    public static IntFraction simp(IntFraction f) {
         int gcd = gcd(f.n,f.d);
         if(gcd != 0) { // Otherwise unsimplifiable.
             f.n = f.n/gcd;
@@ -76,11 +76,11 @@ public class IntFraction implements Fraction {
         return f;
     }
 
-    public int getNumerator() {
+    public int getN() {
         return n;
     }
 
-    public int getDenominator() {
+    public int getD() {
         return d;
     }
     
