@@ -24,5 +24,5 @@ public class Parser {
             }
         }
         return ns;
-    }    
+    }
 }

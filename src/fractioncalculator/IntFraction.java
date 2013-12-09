@@ -8,24 +8,24 @@ package fractioncalculator;
 
 public class IntFraction implements Fraction {
     
-    private int numerator;
-    private int denominator;
+    private int n;
+    private int d;
     
     public IntFraction() {
         this(true,0,0,0);
     }
     
-    public IntFraction(int numerator, int denominator) {
-        this(true,0,numerator,denominator);
+    public IntFraction(int n, int d) {
+        this(true,0,n,d);
     }
     
-    public IntFraction(boolean positive, int numerator, int denominator) {
-        this(positive,0,numerator,denominator);
+    public IntFraction(boolean sign, int n, int d) {
+        this(sign,0,n,d);
     }
     
-    public IntFraction(boolean positive, int wholePart, int numerator, int denominator) {
-        this.numerator = (positive?1:-1)*numerator+wholePart*denominator;
-        this.denominator = denominator;
+    public IntFraction(boolean sign, int num, int n, int d) {
+        this.n = (sign?1:-1)*n+num*d;
+        this.d = d;
         simplify(this);
     }
     
@@ -47,8 +47,8 @@ public class IntFraction implements Fraction {
     
     public static IntFraction add(IntFraction f1, IntFraction f2) {
         IntFraction f = new IntFraction();
-        f.numerator = f1.numerator*f2.denominator + f2.numerator*f1.denominator;
-        f.denominator = f1.denominator*f2.denominator;
+        f.n = f1.n*f2.d + f2.n*f1.d;
+        f.d = f1.d*f2.d;
         return simplify(f);
     }
     
@@ -58,8 +58,8 @@ public class IntFraction implements Fraction {
 
     public static IntFraction multiply(IntFraction f1, IntFraction f2) {
         IntFraction f = new IntFraction();
-        f.numerator = f1.numerator*f2.numerator;
-        f.denominator = f1.denominator*f2.denominator;
+        f.n = f1.n*f2.n;
+        f.d = f1.d*f2.d;
         return simplify(f);
     }
 
@@ -67,21 +67,21 @@ public class IntFraction implements Fraction {
         return multiply(f1,inverse(f2));
     }
     
-    public static IntFraction simplify(IntFraction fraction) {
-        int gcd = gcd(fraction.numerator,fraction.denominator);
+    public static IntFraction simplify(IntFraction f) {
+        int gcd = gcd(f.n,f.d);
         if(gcd != 0) { // Otherwise unsimplifiable.
-            fraction.numerator = fraction.numerator/gcd;
-            fraction.denominator = fraction.denominator/gcd;
+            f.n = f.n/gcd;
+            f.d = f.d/gcd;
         }
-        return fraction;
+        return f;
     }
 
     public int getNumerator() {
-        return numerator;
+        return n;
     }
 
     public int getDenominator() {
-        return denominator;
+        return d;
     }
     
     public static int gcd(int a, int b) {
@@ -91,15 +91,15 @@ public class IntFraction implements Fraction {
     }
     
     public String toString() {
-        return numerator + "/" + denominator;
+        return n + "/" + d;
     }
 
-    private static IntFraction switchSign(IntFraction fraction) {
-        IntFraction f = new IntFraction(-fraction.numerator,fraction.denominator);
-        return f;
+    private static IntFraction switchSign(IntFraction f) {
+        IntFraction frac = new IntFraction(-f.n,f.d);
+        return frac;
     }
-    private static IntFraction inverse(IntFraction fraction) {
-        IntFraction f = new IntFraction(fraction.denominator,fraction.numerator);
-        return f;
+    private static IntFraction inverse(IntFraction f) {
+        IntFraction frac = new IntFraction(f.d,f.n);
+        return frac;
     }
 }
