@@ -61,7 +61,7 @@ public class FractionCalculator {
     }
 
     private static void populateTestCases() {
-        testCases = new String[]{
+        testCases = new String[] {
             "1/3", 
             "1 * 2",
             "1*2",
