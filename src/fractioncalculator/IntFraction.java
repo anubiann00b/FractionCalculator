@@ -35,10 +35,12 @@ public class IntFraction implements Fraction {
                 d = 1;
         } else if(input.contains("_") && input.contains("/")) {
                 d = Integer.parseInt(input.substring(input.indexOf('/')+1,input.length()));
-                n = Integer.parseInt(input.substring(0, input.indexOf('_'))) * d
+                int wholePart = Integer.parseInt(input.substring(0,input.indexOf('_')));
+                n = Math.abs(wholePart)*d
                         + Integer.parseInt(input.substring(input.indexOf('_')+1,input.indexOf('/')));
+                n*=wholePart<0?-1:1;
         } else if(!input.contains("_") && input.contains("/")) {
-                n = Integer.parseInt(input.substring(0, input.indexOf('/')));
+                n = Integer.parseInt(input.substring(0,input.indexOf('/')));
                 d = Integer.parseInt(input.substring(input.indexOf('/')+1,input.length()));
         }
         simp(this);
@@ -86,12 +88,18 @@ public class IntFraction implements Fraction {
         if (f.d<0) {
             f.n = -f.n;
             f.d = -f.d;
-        }        
+        }
+        boolean negative = false;
+        if (f.n<0) {
+            negative = true;
+            f.n = -f.n;
+        }
         int gcd = gcd(f.n,f.d);
         if(gcd != 0) { // Otherwise unsimplifiable.
             f.n = f.n/gcd;
             f.d = f.d/gcd;
         }
+        f.n *= negative?-1:1;
         return f;
     }
 
@@ -124,7 +132,7 @@ public class IntFraction implements Fraction {
         else if (f.n == 0)
             return "0";
         else if (f.d == 1)
-            return String.valueOf(f.n);
+            return String.valueOf((negative?-1:1)*f.n);
         else if (f.n < f.d)
             return (negative?-1:1)*f.n + "/" + f.d;
         else
