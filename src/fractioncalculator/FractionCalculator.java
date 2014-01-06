@@ -6,12 +6,16 @@
 
 package fractioncalculator;
 
+import java.util.Scanner;
+
 public class FractionCalculator {
     
     private static int counter;
     private static String[] testCases;
+    private static Scanner input;
     
     public static void main(String[] args) {
+        input = new Scanner(System.in);
         populateTestCases();
         boolean done = false;
         
@@ -28,31 +32,30 @@ public class FractionCalculator {
         System.out.println("| Version 1.0, made by Shreyas Raman |");
         System.out.println("+------------------------------------+");
         
-        for(int i=0;i<10;i++) {
-            /*
-            String input = getInput();
-            if (input.equals("q")) {
+        while (!done) {
+            String inputString = getInput();
+            if (inputString.equals("q")) {
                 done = true;
             } else {
-                Parser.parse(input);
+                System.out.println(Parser.parse(inputString));
             }
-            */
+            /*
             IntFraction f1 = new IntFraction((int) (10*Math.random()+1),(int) (10*Math.random()+1));
             IntFraction f2 = new IntFraction((int) (10*Math.random()+1),(int) (10*Math.random()+1));
             System.out.println(f1 + " + " + f2 + " = " + f1.add(f2));
             System.out.println(f1 + " - " + f2 + " = " + f1.subt(f2));
             System.out.println(f1 + " * " + f2 + " = " + f1.mult(f2));
             System.out.println(f1 + " / " + f2 + " = " + f1.div(f2));
+            */
         }
     }
     
     public static String getInput() {
-        return getTestCase();
-        //return getInputFromConsole();
+        return getConsole();
     }
 
     private static String getConsole() {
-        return null;
+        return input.nextLine();
     }
 
     private static String getTestCase() {

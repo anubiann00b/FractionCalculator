@@ -29,6 +29,21 @@ public class IntFraction implements Fraction {
         simp(this);
     }
     
+    public IntFraction(String input) {
+        if(!input.contains("/")) {
+                n = Integer.parseInt(input.substring(0, input.length()));
+                d = 1;
+        } else if(input.contains("_") && input.contains("/")) {
+                n = Integer.parseInt(input.substring(0, input.indexOf('_')))
+                        * Integer.parseInt(input.substring(input.indexOf('_')+1,input.indexOf('/')));
+                d = Integer.parseInt(input.substring(input.indexOf('/')+1,input.length()));
+        } else if(!input.contains("_") && input.contains("/")) {
+                n = Integer.parseInt(input.substring(0, input.indexOf('/')));
+                d = Integer.parseInt(input.substring(input.indexOf('/')+1,input.length()));
+        }
+        simp(this);
+    }
+    
     public IntFraction add(IntFraction other) {
         return add(this, other);
     }
@@ -68,6 +83,10 @@ public class IntFraction implements Fraction {
     }
     
     public static IntFraction simp(IntFraction f) {
+        if (f.d<0) {
+            f.n = -f.n;
+            f.d = -f.d;
+        }
         int gcd = gcd(f.n,f.d);
         if(gcd != 0) { // Otherwise unsimplifiable.
             f.n = f.n/gcd;
@@ -91,7 +110,16 @@ public class IntFraction implements Fraction {
     }
     
     public String toString() {
-        return n + "/" + d;
+        IntFraction f = simp(this);
+        
+        if (f.d == 0)
+            return "Error: Denominator is zero.";
+        else if (f.n == 0)
+            return "0";
+        else if (f.d == 1)
+            return "" + f.n;
+        else
+            return f.n + "/" + f.d;
     }
 
     private static IntFraction switchSign(IntFraction f) {
