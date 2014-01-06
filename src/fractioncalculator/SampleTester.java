@@ -36,20 +36,18 @@ public class SampleTester {
    private int count_;
    private int failed_;    
    private String[] failures_;
-   Parser parser_;
 
    public SampleTester() {
       count_ = 0;
       failed_ = 0;
       failures_ = new String[KEEP];
-      parser_ = new Parser();
    }
 
    public void test(String input, String expected) {
        count_++;
        String result;
        try {
-	   IntFraction frac = (IntFraction) parser_.parseFraction(input);
+	   IntFraction frac = (IntFraction) Parser.parseFraction(input);
 	   result = frac.toString();
        } catch (Exception e) {
 	   result = "Exception";

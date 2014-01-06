@@ -34,9 +34,9 @@ public class IntFraction implements Fraction {
                 n = Integer.parseInt(input.substring(0, input.length()));
                 d = 1;
         } else if(input.contains("_") && input.contains("/")) {
-                n = Integer.parseInt(input.substring(0, input.indexOf('_')))
-                        * Integer.parseInt(input.substring(input.indexOf('_')+1,input.indexOf('/')));
                 d = Integer.parseInt(input.substring(input.indexOf('/')+1,input.length()));
+                n = Integer.parseInt(input.substring(0, input.indexOf('_'))) * d
+                        + Integer.parseInt(input.substring(input.indexOf('_')+1,input.indexOf('/')));
         } else if(!input.contains("_") && input.contains("/")) {
                 n = Integer.parseInt(input.substring(0, input.indexOf('/')));
                 d = Integer.parseInt(input.substring(input.indexOf('/')+1,input.length()));
@@ -86,7 +86,7 @@ public class IntFraction implements Fraction {
         if (f.d<0) {
             f.n = -f.n;
             f.d = -f.d;
-        }
+        }        
         int gcd = gcd(f.n,f.d);
         if(gcd != 0) { // Otherwise unsimplifiable.
             f.n = f.n/gcd;
@@ -112,16 +112,25 @@ public class IntFraction implements Fraction {
     public String toString() {
         IntFraction f = simp(this);
         
+        boolean negative = false;
+        
+        if (f.n < 0) {
+            negative = true;
+            f.n = -f.n;
+        }
+        
         if (f.d == 0)
             return "Error: Denominator is zero.";
         else if (f.n == 0)
             return "0";
         else if (f.d == 1)
-            return "" + f.n;
+            return String.valueOf(f.n);
+        else if (f.n < f.d)
+            return (negative?-1:1)*f.n + "/" + f.d;
         else
-            return f.n + "/" + f.d;
+            return (negative?-1:1)*f.n/f.d + "_" + f.n%f.d + "/" + f.d;
     }
-
+    
     private static IntFraction switchSign(IntFraction f) {
         IntFraction frac = new IntFraction(-f.n,f.d);
         return frac;
