@@ -7,10 +7,10 @@
 package fractioncalculator;
 
 public interface Fraction {
-    public IntFraction add(IntFraction other);
-    public IntFraction subt(IntFraction other);
-    public IntFraction mult(IntFraction other);
-    public IntFraction div(IntFraction other);
+    public Fraction add(Fraction other);
+    public Fraction subt(Fraction other);
+    public Fraction mult(Fraction other);
+    public Fraction div(Fraction other);
     public int getN();
     public int getD();
     public String toString();

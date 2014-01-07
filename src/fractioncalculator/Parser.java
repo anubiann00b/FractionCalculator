@@ -8,11 +8,11 @@ package fractioncalculator;
 
 public class Parser {
 
-    public static IntFraction parse(String input) {
+    public static Fraction parse(String input) {
         return parseFraction(clean(input));
     }
     
-    public static IntFraction parseFraction(String input) {
+    public static Fraction parseFraction(String input) {
         for (int i=0;i<input.length();i++) {
             if (input.charAt(i)=='*') {
                 return IntFraction.mult(parseFraction(input.substring(0,i)),

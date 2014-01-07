@@ -10,6 +10,7 @@ public class IntFraction implements Fraction {
     
     private int n;
     private int d;
+    private boolean negative;
     
     public IntFraction() {
         this(true,0,0,0);
@@ -31,67 +32,73 @@ public class IntFraction implements Fraction {
     
     public IntFraction(String input) {
         if(!input.contains("/")) {
-                n = Integer.parseInt(input.substring(0, input.length()));
-                d = 1;
+            n = Integer.parseInt(input.substring(0, input.length()));
+            d = 1;
         } else if(input.contains("_") && input.contains("/")) {
-                d = Integer.parseInt(input.substring(input.indexOf('/')+1,input.length()));
-                int wholePart = Integer.parseInt(input.substring(0,input.indexOf('_')));
-                n = Math.abs(wholePart)*d
-                        + Integer.parseInt(input.substring(input.indexOf('_')+1,input.indexOf('/')));
-                n*=wholePart<0?-1:1;
+            if (input.charAt(0) == '-') {
+                negative = true;
+            }
+            d = Integer.parseInt(input.substring(input.indexOf('/')+1,input.length()));
+            if (d<0) {
+                negative = negative?false:true;
+                d = -d;
+            }
+            int wholePart = Math.abs(Integer.parseInt(input.substring(0,input.indexOf('_'))));
+            n = wholePart*d
+                    + Math.abs(Integer.parseInt(input.substring(input.indexOf('_')+1,input.indexOf('/'))));
+            n*=wholePart<0?-1:1;
         } else if(!input.contains("_") && input.contains("/")) {
-                n = Integer.parseInt(input.substring(0,input.indexOf('/')));
-                d = Integer.parseInt(input.substring(input.indexOf('/')+1,input.length()));
+            n = Integer.parseInt(input.substring(0,input.indexOf('/')));
+            d = Integer.parseInt(input.substring(input.indexOf('/')+1,input.length()));
         }
         simp(this);
     }
     
-    public IntFraction add(IntFraction other) {
+    public Fraction add(Fraction other) {
         return add(this, other);
     }
 
-    public IntFraction subt(IntFraction other) {
+    public Fraction subt(Fraction other) {
         return subt(this, other);
     }
 
-    public IntFraction mult(IntFraction other) {
+    public Fraction mult(Fraction other) {
         return mult(this, other);
     }
 
-    public IntFraction div(IntFraction other) {
+    public Fraction div(Fraction other) {
         return div(this, other);
     }
     
-    public static IntFraction add(IntFraction f1, IntFraction f2) {
+    public static IntFraction add(Fraction f1, Fraction f2) {
         IntFraction f = new IntFraction();
-        f.n = f1.n*f2.d + f2.n*f1.d;
-        f.d = f1.d*f2.d;
+        f.n = f1.getN()*f2.getD() + f2.getN()*f1.getD();
+        f.d = f1.getD()*f2.getD();
         return simp(f);
     }
     
-    public static IntFraction subt(IntFraction f1, IntFraction f2) {
+    public static IntFraction subt(Fraction f1, Fraction f2) {
         return add(f1,switchSign(f2));
     }
 
-    public static IntFraction mult(IntFraction f1, IntFraction f2) {
+    public static IntFraction mult(Fraction f1, Fraction f2) {
         IntFraction f = new IntFraction();
-        f.n = f1.n*f2.n;
-        f.d = f1.d*f2.d;
+        f.n = f1.getN()*f2.getN();
+        f.d = f1.getD()*f2.getD();
         return simp(f);
     }
 
-    public static IntFraction div(IntFraction f1, IntFraction f2) {
+    public static IntFraction div(Fraction f1, Fraction f2) {
         return mult(f1,inverse(f2));
     }
     
     public static IntFraction simp(IntFraction f) {
         if (f.d<0) {
-            f.n = -f.n;
+            f.negative = f.negative?false:true;
             f.d = -f.d;
         }
-        boolean negative = false;
         if (f.n<0) {
-            negative = true;
+            f.negative = f.negative?false:true;
             f.n = -f.n;
         }
         int gcd = gcd(f.n,f.d);
@@ -99,7 +106,6 @@ public class IntFraction implements Fraction {
             f.n = f.n/gcd;
             f.d = f.d/gcd;
         }
-        f.n *= negative?-1:1;
         return f;
     }
 
@@ -120,31 +126,24 @@ public class IntFraction implements Fraction {
     public String toString() {
         IntFraction f = simp(this);
         
-        boolean negative = false;
-        
-        if (f.n < 0) {
-            negative = true;
-            f.n = -f.n;
-        }
-        
         if (f.d == 0)
             return "Error: Denominator is zero.";
         else if (f.n == 0)
             return "0";
         else if (f.d == 1)
-            return String.valueOf((negative?-1:1)*f.n);
+            return String.valueOf((negative?"-":"") + f.n);
         else if (f.n < f.d)
-            return (negative?-1:1)*f.n + "/" + f.d;
+            return (negative?"-":"") + f.n + "/" + f.d;
         else
-            return (negative?-1:1)*f.n/f.d + "_" + f.n%f.d + "/" + f.d;
+            return (negative?"-":"") + f.n/f.d + "_" + f.n%f.d + "/" + f.d;
     }
     
-    private static IntFraction switchSign(IntFraction f) {
-        IntFraction frac = new IntFraction(-f.n,f.d);
+    private static IntFraction switchSign(Fraction f) {
+        IntFraction frac = new IntFraction(-f.getN(),f.getD());
         return frac;
     }
-    private static IntFraction inverse(IntFraction f) {
-        IntFraction frac = new IntFraction(f.d,f.n);
+    private static IntFraction inverse(Fraction f) {
+        IntFraction frac = new IntFraction(f.getD(),f.getN());
         return frac;
     }
 }

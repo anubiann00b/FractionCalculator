@@ -14,6 +14,8 @@ public class FractionCalculator {
     private static String[] testCases;
     private static Scanner input;
     
+    public final boolean USE_BIG_FRACTION = false;
+    
     public static void main(String[] args) {
         input = new Scanner(System.in);
         populateTestCases();
