@@ -1,6 +1,6 @@
 /* Shreyas Raman
  * APCS Period 2
- * December 3, 2013
+ * January 10, 2014
  * Project 2: Parser (3/4)
  */
 
@@ -17,7 +17,9 @@ public class Parser {
             if (input.charAt(i)=='*') {
                 return IntFraction.mult(parseFraction(input.substring(0,i)),
                         parseFraction(input.substring(i+1,input.length())));
-            }
+            } else if(input.charAt(i)=='+')
+                return IntFraction.add(parseFraction(input.substring(0,i)), 
+                        parseFraction(input.substring(i+1,input.length())));
         }
         return new IntFraction(input);
     }
