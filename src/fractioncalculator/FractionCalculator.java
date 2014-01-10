@@ -36,19 +36,10 @@ public class FractionCalculator {
         
         while (!done) {
             String inputString = getInput();
-            if (inputString.equals("q")) {
+            if (inputString.equals("q"))
                 done = true;
-            } else {
+            else
                 System.out.println(Parser.parse(inputString));
-            }
-            /*
-            IntFraction f1 = new IntFraction((int) (10*Math.random()+1),(int) (10*Math.random()+1));
-            IntFraction f2 = new IntFraction((int) (10*Math.random()+1),(int) (10*Math.random()+1));
-            System.out.println(f1 + " + " + f2 + " = " + f1.add(f2));
-            System.out.println(f1 + " - " + f2 + " = " + f1.subt(f2));
-            System.out.println(f1 + " * " + f2 + " = " + f1.mult(f2));
-            System.out.println(f1 + " / " + f2 + " = " + f1.div(f2));
-            */
         }
     }
     
