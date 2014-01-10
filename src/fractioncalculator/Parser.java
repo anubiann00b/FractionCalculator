@@ -32,4 +32,8 @@ public class Parser {
         }
         return ns;
     }
+    
+    public static boolean isOperator(char input) {
+        return input == '+' || input == '-' || input == '*' || input == '/';
+    }
 }
